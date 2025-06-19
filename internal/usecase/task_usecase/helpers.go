@@ -32,6 +32,6 @@ func (t *TaskUsecase) GenerateTask(ctx context.Context, task *task_model.Task) (
 	if err != nil {
 		return nil, err
 	}
-	task.RunTime = time.Now().Sub(timeStart)
+	task.RunTime = time.Since(timeStart)
 	return task, nil
 }
