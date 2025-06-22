@@ -84,7 +84,7 @@ func (h *GetTaskHandler) ExecFunc(ctx context.Context, r *http.Request) ([]byte,
 		Title:     task.Title,
 		Status:    task.Status,
 		CreatedAt: task.CreatedAt,
-		RunTime:   time.Since(t),
+		RunTime:   task.RunTime.String(),
 	}
 
 	json, err := result.NewResultOk(response, time.Since(t)).GetJson()

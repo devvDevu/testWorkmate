@@ -2,8 +2,6 @@ package task_usecase
 
 import (
 	"context"
-	"errors"
-	"sync"
 	"testWorkmate/internal/model/task_model"
 
 	"github.com/sirupsen/logrus"
@@ -30,30 +28,13 @@ func (t *TaskUsecase) CreateTask(ctx context.Context, task *task_model.Task) (*t
 	const action = "TaskUsecase CreateTask"
 	const method = "CreateTask"
 
-	wg := sync.WaitGroup{}
-	var taskResult chan *task_model.Task
-
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		task, err := t.GenerateTask(ctx, task)
-		if err != nil {
-			logrus.WithFields(logrus.Fields{
-				"usecaseName": usecaseName,
-				"method":      method,
-			}).WithError(err).Error(action)
-		}
-		taskResult <- task
-	}()
-
-	wg.Wait()
-
-	val, ok := <-taskResult
-	if !ok {
-		return nil, errors.New("task result channel closed")
+	task, err := t.GenerateTask(ctx, task)
+	if err != nil {
+		logrus.WithFields(logrus.Fields{
+			"usecaseName": usecaseName,
+			"method":      method,
+		}).WithError(err).Error(action)
 	}
-
-	task = val
 
 	logrus.WithFields(logrus.Fields{
 		"usecaseName": usecaseName,

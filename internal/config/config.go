@@ -4,13 +4,19 @@ import (
 	"context"
 	"os"
 	"testWorkmate/internal/common/types/error_with_codes"
+	http_config "testWorkmate/internal/config/http"
 
 	"github.com/sirupsen/logrus"
 )
 
 type Config struct {
-	path        string
-	envReader   envReader
+	Http      http_config.HttpConfig `yaml:"http"`
+	path      string
+	envReader envReader
+}
+
+func (c *Config) GetHttp() *http_config.HttpConfig {
+	return &c.Http
 }
 
 type envReader interface {

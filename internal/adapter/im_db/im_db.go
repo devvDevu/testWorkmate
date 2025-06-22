@@ -1,15 +1,13 @@
-package em_db
+package im_db
 
 import (
 	"context"
-	"sync"
 	"testWorkmate/internal/common/types/error_with_codes"
 	"testWorkmate/internal/model/task_model"
 )
 
 // ImitationDb is a mock database for testing purposes.
 type ImitationDb struct {
-	mu    *sync.Mutex
 	table map[uint64]task_model.Task
 }
 
@@ -20,9 +18,7 @@ func NewImitationDb() *ImitationDb {
 }
 
 func (m *ImitationDb) Exec(ctx context.Context, values *task_model.Task, dest *task_model.Task) error {
-	m.mu.Lock()
-	defer m.mu.Unlock()
-	m.table[dest.ID] = *values
+	m.table[values.ID] = *values
 	*dest = *values
 	return nil
 }

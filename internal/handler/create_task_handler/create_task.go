@@ -32,7 +32,7 @@ func NewCreateTaskHandler(taskUsecase taskUsecaseI) *CreateTaskHandler {
 }
 
 func (h *CreateTaskHandler) GetPath() handler_type.HandlerPath {
-	return "/api/v1/create_task"
+	return "/api/v1/task"
 }
 
 func (h *CreateTaskHandler) GetMethod() handler_type.HandlerMethod {
@@ -86,7 +86,7 @@ func (h *CreateTaskHandler) ExecFunc(ctx context.Context, r *http.Request) ([]by
 		Title:     task.Title,
 		Status:    task.Status,
 		CreatedAt: task.CreatedAt,
-		RunTime:   time.Since(t),
+		RunTime:   task.RunTime.String(),
 	}
 
 	json, err := result.NewResultOk(response, time.Since(t)).GetJson()

@@ -20,13 +20,13 @@ func (t *TaskUsecase) GenerateTask(ctx context.Context, task *task_model.Task) (
 	if err != nil {
 		return nil, err
 	}
-	time.Sleep(time.Second * 3) // 3 seconds
+	time.Sleep(time.Second * 120) // 120 seconds
 	task.Status = task_type.TaskStatusInProgress
 	task, err = t.taskService.UpdateTask(ctx, task)
 	if err != nil {
 		return nil, err
 	}
-	time.Sleep(time.Second * 3) // 3 seconds
+	time.Sleep(time.Second * 60) // 60 seconds
 	task.Status = task_type.TaskStatusCompleted
 	task, err = t.taskService.UpdateTask(ctx, task)
 	if err != nil {

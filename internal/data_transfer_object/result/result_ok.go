@@ -8,13 +8,13 @@ import (
 
 type ResultOk struct {
 	Result        interface{}   `json:"result"`
-	ExecutionTime time.Duration `json:"execution_time"`
+	ExecutionTime string        `json:"execution_time"`
 }
 
 func NewResultOk(result interface{}, executionTime time.Duration) *ResultOk {
 	return &ResultOk{
 		Result:        result,
-		ExecutionTime: executionTime,
+		ExecutionTime: executionTime.String(),
 	}
 }
 

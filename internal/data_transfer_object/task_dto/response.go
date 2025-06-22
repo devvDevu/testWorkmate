@@ -10,5 +10,5 @@ type TaskResponse struct {
 	Title     string               `json:"title"`
 	Status    task_type.TaskStatus `json:"status"`
 	CreatedAt time.Time            `json:"created_at"`
-	RunTime   time.Duration        `json:"run_time"`
+	RunTime   string               `json:"run_time"`
 }

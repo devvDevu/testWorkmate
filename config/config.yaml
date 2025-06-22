@@ -1,0 +1,5 @@
+env:
+  type: "dev" # local dev prod ENV: ENV_TYPE
+http:
+  addr: ":8080" # ENV: HTTP_ADDR
+  use_https: false # ENV: HTTP_USE_HTTPS
